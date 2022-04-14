@@ -1,6 +1,6 @@
 # DOM & Typecasting
 
-Just line in JavaScript, we can interact with the DOM using TypeScript as well.
+Just like in JavaScript, we can interact with the DOM using TypeScript as well.
 
 ## Create file
 * ./src/app.ts
