@@ -29,3 +29,25 @@ Example 1:
 
 - The "void" is inferred because we aren't returning anything, so everything is okay.
 
+Example 2:
+
+    let calc: (a: number, b: number, c: string) => number; 
+
+    calc = (numOne: number, numTwo: number, action: string) => {
+        if (action === 'add') {
+            return numOne + numTwo;
+        }
+    }
+
+- This function will return an error. Can you see why? 
+- If the action equals "add" it will return `numberOne` + `numberTwo`, but what if it doesn't? It returns void, and that's not how the function signature was created. The function signature says that a number must be returned.
+
+Example 3: 
+
+    let logDetails: (obj: {name: string, age: number }) => void;
+
+    type person = {name: string, age: number};
+
+    logDetails = (person: person) => {
+        console.log(`${person.name} is ${person.age} years old.`)
+    }
