@@ -1,4 +1,4 @@
-function add(n1: number, n2: number, showResult: boolean, phrase: string) {
+function adding(n1: number, n2: number, showResult: boolean, phrase: string) {
 
   let n = n1 + n2;
   
@@ -15,4 +15,4 @@ const y = 3;
 const show = true;
 const words = "The total is: ";
 
-add(x, y, show, words);
+adding(x, y, false, words);
