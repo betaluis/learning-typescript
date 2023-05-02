@@ -19,6 +19,7 @@ const addOrConcat = (a: number, b: number, c: "add" | "concat"): number | string
     return "" + a + b;
 }
 
+// We're telling typescript that we know better than it in this example
 let myVal: string = addOrConcat(2,2,"concat") as string;
 
 // Be careful because TS sees no problem here - A string is returned
