@@ -19,23 +19,12 @@ class Menu {
         this.items.push(item);
     }
 
-    getItemsByCategory(MenuItemCategory) {
-        return this.items.filter(item => item.category === MenuItemCategory);
+    getItemsByCategory(category: MenuItemCategory ) {
+        return this.items.filter(item => item.category === category);
     }
 
     getMostExpensiveItem() {
-        let mostExpensiveItem: string = "";
-        let currentMostExpensivePrice: number = 0;
-
-        for (let i = 0; i < this.items.length; i++) {
-
-            if (this.items[i].price > currentMostExpensivePrice) {
-                mostExpensiveItem = this.items[i].name;
-                currentMostExpensivePrice = this.items[i].price;
-            }
-        }
-
-        return mostExpensiveItem;
+        return this.items.reduce((prev, curr) => prev.price > curr.price ? prev : curr);
     }
 }
 

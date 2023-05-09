@@ -12,19 +12,11 @@ var Menu = /** @class */ (function () {
     Menu.prototype.addItem = function (item) {
         this.items.push(item);
     };
-    Menu.prototype.getItemsByCategory = function (MenuItemCategory) {
-        return this.items.filter(function (item) { return item.category === MenuItemCategory; });
+    Menu.prototype.getItemsByCategory = function (category) {
+        return this.items.filter(function (item) { return item.category === category; });
     };
     Menu.prototype.getMostExpensiveItem = function () {
-        var mostExpensiveItem = "";
-        var currentMostExpensivePrice = 0;
-        for (var i = 0; i < this.items.length; i++) {
-            if (this.items[i].price > currentMostExpensivePrice) {
-                mostExpensiveItem = this.items[i].name;
-                currentMostExpensivePrice = this.items[i].price;
-            }
-        }
-        return mostExpensiveItem;
+        return this.items.reduce(function (prev, curr) { return prev.price > curr.price ? prev : curr; });
     };
     return Menu;
 }());
