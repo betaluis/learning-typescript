@@ -15,6 +15,17 @@ var Menu = /** @class */ (function () {
     Menu.prototype.getItemsByCategory = function (MenuItemCategory) {
         return this.items.filter(function (item) { return item.category === MenuItemCategory; });
     };
+    Menu.prototype.getMostExpensiveItem = function () {
+        var mostExpensiveItem = "";
+        var currentMostExpensivePrice = 0;
+        for (var i = 0; i < this.items.length; i++) {
+            if (this.items[i].price > currentMostExpensivePrice) {
+                mostExpensiveItem = this.items[i].name;
+                currentMostExpensivePrice = this.items[i].price;
+            }
+        }
+        return mostExpensiveItem;
+    };
     return Menu;
 }());
 var cfl = new Menu();
@@ -48,9 +59,11 @@ cfl.addItem({
     price: 3.15,
     category: MenuItemCategory.Dessert,
 });
-console.log("////////// Side Items //////////");
-console.log(cfl.getItemsByCategory(MenuItemCategory.Side));
-console.log("////////// Entree Items //////////");
-console.log(cfl.getItemsByCategory(MenuItemCategory.Entree));
-console.log("////////// Dessert Items //////////");
-console.log(cfl.getItemsByCategory(MenuItemCategory.Dessert));
+// console.log("////////// Side Items //////////");
+// console.log(cfl.getItemsByCategory(MenuItemCategory.Side));
+// console.log("////////// Entree Items //////////");
+// console.log(cfl.getItemsByCategory(MenuItemCategory.Entree));
+// console.log("////////// Dessert Items //////////");
+// console.log(cfl.getItemsByCategory(MenuItemCategory.Dessert));
+console.log("////////// Most Expensive Item //////////");
+console.log(cfl.getMostExpensiveItem());
