@@ -1,141 +1,83 @@
+"use strict";
 ////////////////////////////////////////
 //            Type aliases            //
 ////////////////////////////////////////
-
-type StringOrNumber = string | number;
-type StringOrNumberArray = (string | number)[];
-
-/*
-type Guitarist = {
-    name?: string;
-    active: boolean;
-    albums: StringOrNumberArray;
-}
-*/
-type UserId = StringOrNumber;
-
 // This is the difference between types and interfaces
 // can't do this:
 // interface postId = stringOrNumber;
-
 ////////////////////////////////////////
 //           Literal Types            //
 ////////////////////////////////////////
-
-let myName: "Dave";
+let myName;
 // myName = "Luis"; // Error
 // myName = "Dave"; // OK
-
-let username: "Luis" | "Dave" | "John" | "Amy";
+let username;
 username = "Amy"; // username has to be one of the 4 strings above.
-
-/////////// Challenge ////////////
-
-// Step 1: Define a type literal `Person` that has three properties: `name`, `age`, and `email`.
-type Person = {
-    name: string;
-    age: number;
-    email: string;
-};
-
 // Step 2: Create an object of type `Person` and assign it values for each property.
-const person: Person = {
+const person = {
     name: "Luis",
     age: 27,
     email: "luis@email.com",
 };
-
 // Step 3: 
 // Write a function `printPerson` that takes a parameter of type
 // `Person` and logs the person's information to the console.
-
 // function printPerson(person: Person) {
 //     console.log(`Hello ${person.name}! You are ${person.age} years old, and your email is ${person.email}.`);
 // }
-
 // Step 4: Call the `printPerson` function with the `person` object as an argument.
 console.log("");
 // printPerson(person);
 console.log("");
-
 ////////////////////////////////////////
 //              Functions             //
 ////////////////////////////////////////
-
-const add = (a: number, b: number): number => {
+const add = (a, b) => {
     return a + b;
-}
-
-const logMsg = (message: any): void => {
+};
+const logMsg = (message) => {
     console.log(message);
-}
-
+};
 logMsg("Hello!");
 logMsg(add(2, 3));
-
-let substract = function(c: number, d: number): number {
+let substract = function (c, d) {
     return c - d;
-}
-
-type mathFunction = (a: number, b: number) => number;
-
-let multiply: mathFunction = function (c,d) {
+};
+let multiply = function (c, d) {
     return c * d;
-}
-
+};
 // Optional paramaters
 // Required parameters come first
-
-const addAll = (a: number, b: number, c?: number): number => {
+const addAll = (a, b, c) => {
     if (typeof c !== "undefined") {
-       return a + b + c;
+        return a + b + c;
     }
     return a + b;
-}
-
+};
 // Default paramaters
-const sumAll = (a: number, b: number, c: number = 2) => {
+const sumAll = (a, b, c = 2) => {
     return a + b + c;
-}
-
+};
 // Rest parameters
-const total = (...nums: number[]): number => {
-    return nums.reduce((prev, curr) => prev + curr)
-}
-
+const total = (...nums) => {
+    return nums.reduce((prev, curr) => prev + curr);
+};
 logMsg({
-    "add": add(2,3),
-    "addAll": addAll(2,3),
-    "sumAll": sumAll(2,3),
-    "total": total(1,2,3,4),
-})
-
-///////////////////////////////////////////////
-//            Functions challenge            //
-///////////////////////////////////////////////
-
-// Step 1: Define an interface called `Person` that has the following properties:
-// - `name` (a string)
-// - `age` (a number)
-// - `email` (a string)
-
-// Step 2: Define a function called `printPerson` that takes a parameter of type `Person` and returns nothing.
-// The function should log the person's name, age, and email to the console.
-
-// Solution to step 2
-type PrintPerson = (person: Person) => void;
-const returnPerson: PrintPerson = (person) => {
-     return `From functions: Hello ${person.name}! You are ${person.age} years old, and your email is ${person.email}.`;
-}
-const printPerson: PrintPerson = (person) => {
-     console.log(`From functions: Hello ${person.name}! You are ${person.age} years old, and your email is ${person.email}.`);
-}
+    "add": add(2, 3),
+    "addAll": addAll(2, 3),
+    "sumAll": sumAll(2, 3),
+    "total": total(1, 2, 3, 4),
+});
+const returnPerson = (person) => {
+    return `From functions: Hello ${person.name}! You are ${person.age} years old, and your email is ${person.email}.`;
+};
+const printPerson = (person) => {
+    console.log(`From functions: Hello ${person.name}! You are ${person.age} years old, and your email is ${person.email}.`);
+};
 printPerson(person);
-
 // Step 3: Create an array of `Person` objects with at least 3 elements.
-
 // Solution to step 3
-const people: Person[] = [
+const people = [
     {
         name: "Luis",
         email: "luis@email.com",
@@ -151,51 +93,44 @@ const people: Person[] = [
         email: "lillie@email.com",
         age: 0,
     },
-]
-
-
+];
 // Step 4: Iterate over the array and call the `printPerson` function for each element.
 // Bonus step: Create a new array of `Person` objects using the `map` function and log the 
 // result to the console.
-
 console.log("");
 console.log("///////////// People Iteration /////////////");
 console.log("");
 people.map((person, index) => console.log(index, returnPerson(person)));
 console.log("");
-
-
 // -------------- Never -----------------
 // I forgot why I put never here..... 
-
-const createError = (errMsg: string) => {
-    throw new Error(errMsg)
-}
-
+const createError = (errMsg) => {
+    throw new Error(errMsg);
+};
 const infinite = () => {
-    let i: number = 1;
+    let i = 1;
     while (true) {
-        i++
-        if (i > 10) break;
+        i++;
+        if (i > 10)
+            break;
     }
-}
-
+};
 // Custom type guard
-const isNumber = (value: number): boolean => {
+const isNumber = (value) => {
     return typeof value === "number"
         ? true : false;
-}
+};
 // Use of the never type
-const numberOrString = (value: string | number): string => {
-    if (typeof value === "string") return "string";
-    if (isNumber(value)) return "number";
+const numberOrString = (value) => {
+    if (typeof value === "string")
+        return "string";
+    if (isNumber(value))
+        return "number";
     return createError("You never want to do this");
-}
-
+};
 ////////////////////////////////////////////////
 //          Type Guarding Challenge           //
 ////////////////////////////////////////////////
-
 /*
 Step 1: Define an interface called `Vehicle` that has the following properties:
 - `type` (a string)
@@ -223,13 +158,11 @@ If the vehicle is a `Car`, the function should log the number of doors to the co
 
 Step 8: Call the `printNumDoors` function for each element in the array of `Vehicle` objects.
 
-Bonus step: Create a new array that includes only the `Car` objects from the original array using the 
+Bonus step: Create a new array that includes only the `Car` objects from the original array using the
 `filter` function.
 */
-
 // ---
 // First attempt
-
 /*
 interface Vehicle {
     type: string;
@@ -305,7 +238,7 @@ const printNumDoors = (vehicle: Vehicle | Car | Motorcycle): void => {
     }
 }
 
-// 8 
+// 8
 console.log("");
 console.log("/////////// Print The Number of Doors for Each Vehicle ////////////");
 vehicles.map(v => printNumDoors(v));

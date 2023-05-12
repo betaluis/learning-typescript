@@ -13,7 +13,6 @@ let c = a as Three;
 let d = <One>"World";
 let e = <string | number>"World";
 
-
 const addOrConcat = (a: number, b: number, c: "add" | "concat"): number | string => {
     if (c = "add") return a + b;
     return "" + a + b;
@@ -29,5 +28,5 @@ let nextVal: number = addOrConcat(2,2,"add") as number;
 const img = document.querySelector("img")!;
 const myImg = document.getElementById("#img") as HTMLImageElement;
 
-img.src
+img.src;
 myImg.src;

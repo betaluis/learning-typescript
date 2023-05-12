@@ -1,5 +1,5 @@
+"use strict";
 // Classes
-
 // A bit repetative
 // ---------------------------------
 // class Coder {
@@ -20,50 +20,38 @@
 //         this.lang = lang;
 //     }
 // }
-
 // A better solution with a visibility modifier
 // --------------------------------------------
-
 class Coder {
-    secondLang!: string; // beginners might want to stay away from this.
-
     // Using the visibility modifier in the constructor
-    constructor(
-        public readonly name: string,
-        public music: string,
-        private age: number,
-        protected lang: string = "Typescript",
-    ) {}
-
-    public getAge() {
+    constructor(name, music, age, lang = "Typescript") {
+        this.name = name;
+        this.music = music;
+        this.age = age;
+        this.lang = lang;
+    }
+    getAge() {
         return `Hello, I am ${this.age} years old.`;
     }
 }
-
 const Luis = new Coder("Luis", "hiphop", 27);
 // You can access a method that gets a private value, but can't access the private/protected value itself.
 console.log({ "Luis age": Luis.getAge() });
 // console.log(Luis.age);
 // console.log(Luis.lang);
-
 class WebDev extends Coder {
-    constructor(
-        public computer: string,
-        // notice that we don't have to use the visibility modifiers from the parent class.
-        name: string,
-        music: string,
-        age: number,
-    ) {
+    constructor(computer, 
+    // notice that we don't have to use the visibility modifiers from the parent class.
+    name, music, age) {
         // We have to call the super class constructor when extending a class and accessing the parent class properties.
         super(name, music, age);
         this.computer = computer;
+        this.computer = computer;
     }
-    
-    public getLang() {
+    getLang() {
         return `I write ${this.lang}`;
     }
 }
-
 const Sara = new WebDev("Mac", "Sara", "Lofi", 25);
 console.log({
     name: Sara.name,
@@ -71,118 +59,78 @@ console.log({
     music: Sara.music,
     computer: Sara.computer,
     lang: Sara.getLang()
-}); 
-    /* output: { 
-        name: 'Sara', 
-        age: 'Hello, I am 25 years old.', 
-        music: 'Lofi', 
-        computer: 'Mac', 
-        lang: 'I write Typescript' 
-    } */
-
-// console.log(Sara.age); // This will throw an error because age is private.
-// console.log(Sara.lang); // This will throw an error because lang is protected.
-
-// -------------------------------------------------------
-//   Implementing an interface to a class
-// -------------------------------------------------------
-
-interface musician {
-    name: string;
-    instrument: string;
-    play(action: string): string;
-}
-
-class Guitarist implements musician {
-    name: string;
-    instrument: string;
-    
-    constructor(name: string, instrument: string) {
+});
+class Guitarist {
+    constructor(name, instrument) {
         this.name = name;
         this.instrument = instrument;
     }
-
-    play(action: string) {
+    play(action) {
         return `${this.name} ${action} the ${this.instrument}`;
     }
 }
-
-const Page = new Guitarist("Jimmy Page", "guitar")
+const Page = new Guitarist("Jimmy Page", "guitar");
 console.log({
     name: Page.name,
     instrument: Page.instrument,
     action: Page.play("strums")
-})
-
+});
 // -------------------------------------------------------
-
 // What does the static keyword do?
 // ---------------------------------
 // Shared by all instances of a class.
 // Accessed without instantiating the class.
 // Accessed using the class name.
 // ex: ClassName.staticMethod()
-
 // Example
 // ---------------------------------
-
 class Peeps {
-    static count: number = 0; // This is a static property. It is shared by all instances of the class.
-    
-    static getCount(): number { // This is a static method. It is shared by all instances of the class.
+    static getCount() {
         return Peeps.count;
     }
-
-    public id: number; 
-
-    constructor(public name: string) { 
+    constructor(name) {
+        this.name = name;
         this.name = name;
         this.id = ++Peeps.count;
     }
 }
-
+Peeps.count = 0; // This is a static property. It is shared by all instances of the class.
 const John = new Peeps("John");
 const Steve = new Peeps("Steve");
 const Amy = new Peeps("Amy");
-
 console.log({
     count: Peeps.count,
     John: { name: John.name, id: John.id },
     Steve: { name: Steve.name, id: Steve.id },
     Amy: { name: Amy.name, id: Amy.id },
-}) 
-/* output: 
+});
+/* output:
     {
-        count: 3, 
-        John: { name: 'John', id: 1 }, 
-        Steve: { name: 'Steve', id: 2 }, 
-        Amy: { name: 'Amy', id: 3 } 
+        count: 3,
+        John: { name: 'John', id: 1 },
+        Steve: { name: 'Steve', id: 2 },
+        Amy: { name: 'Amy', id: 3 }
     }
 */
-
 class Bands {
-    private dataState: string[];
-
-    constructor(){
+    constructor() {
         this.dataState = [];
     }
-    
-    public get data(): string[] {
+    get data() {
         return this.dataState;
     }
-
-    public set data(value: string[]) {
+    set data(value) {
         if (Array.isArray(value) && value.every(element => typeof element === "string")) {
             this.dataState = value;
-            return
-        } else throw new Error("Param is not an array of strings")
+            return;
+        }
+        else
+            throw new Error("Param is not an array of strings");
     }
 }
-
 const myBands = new Bands();
-myBands.data = ["Led Zep", "21 Pilots", "Maroon 5"]
+myBands.data = ["Led Zep", "21 Pilots", "Maroon 5"];
 console.log({ data: myBands.data });
-myBands.data = [ ...myBands.data, "ZZ Top" ];
+myBands.data = [...myBands.data, "ZZ Top"];
 console.log({ data2: myBands.data });
 // myBands.data = ["Van Halen", 5150]; // Throws an error
-
