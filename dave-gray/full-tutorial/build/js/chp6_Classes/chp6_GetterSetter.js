@@ -20,3 +20,5 @@ bands.data = ["Led Zeppelin", "Aerosmith", "Guns N' Roses", "The Beach Boys", "B
 console.log(bands.data);
 bands.data = [...bands.data, "The Beatles"];
 console.log(bands.data);
+bands.data = ["The Beatles"];
+console.log(bands.data);
