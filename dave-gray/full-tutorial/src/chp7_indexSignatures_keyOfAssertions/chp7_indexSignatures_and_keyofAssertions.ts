@@ -79,16 +79,20 @@ for (const key in student) {
 
 console.log("-------------- Alternative ---------------");
 console.log("array of properties in the object: ", Object.keys(student));
-Object.keys(student).map(k => console.log(student[k as keyof typeof student]));
+Object.keys(student).map(k => console.log(student[k as keyof typeof student])); // typeof student is the type of the object which also works incase you didn't have the interface/type.
 
 // another keyof example using a function 
 // ----------------------------------------------
+
+// keyof is a type operator that returns the keys of a type as a union of string literals
+// keyof Student returns "name" | "GPA" | "age"
 
 const logStudentKey = (student: Student, key: keyof Student): void => {
     console.log("------------- keyof with function -------------");
     console.log(`Student ${key}: ${student[key]}`);
 }
-logStudentKey(student, "GPA")
+logStudentKey(student, "GPA") // consoles Student GPA: 3.5
+
 
 // ---------------------------------------------
 // We're goirg to achive the same thing with a type
@@ -105,6 +109,15 @@ const monthlyIncomes: Incomes = {
     sidehustle: 200
 }
 for (const revenue in monthlyIncomes) {
-    // console.log(monthlyIncomes[revenue]); // ts has a problem with this if there is no assertion
+
     console.log(monthlyIncomes[revenue as keyof Incomes]);
+
+    // ----------------------------------------------------------------
+    // ERROR: ts has a problem with this if there is no assertion
+    //
+    // console.log(monthlyIncomes[revenue]);
+    //
+    // The only keys that can be used are the ones in template literals
+    // ----------------------------------------------------------------
+
 }
