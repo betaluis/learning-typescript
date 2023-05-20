@@ -25,6 +25,7 @@ console.log(outerFunction(10)(20)); // 30
 
 type CounterType = () => { increment: () => number }
 
+/*
 const createCounter: CounterType = (): { increment: () => number } => {
     let value = 0;
 
@@ -43,3 +44,4 @@ const counter2 = createCounter();
 console.log(counter1.increment());
 console.log(counter2.increment());
 console.log(counter2.increment());
+*/

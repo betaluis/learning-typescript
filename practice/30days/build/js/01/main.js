@@ -16,17 +16,23 @@ const outerFunction = (base) => {
     };
 };
 console.log(outerFunction(10)(20)); // 30
-const createCounter = () => {
+/*
+const createCounter: CounterType = (): { increment: () => number } => {
     let value = 0;
+
     const increment = () => {
         return ++value;
-    };
+    }
+
     return {
         increment,
-    };
-};
+    }
+}
+
 const counter1 = createCounter();
 const counter2 = createCounter();
+
 console.log(counter1.increment());
 console.log(counter2.increment());
 console.log(counter2.increment());
+*/
