@@ -15,3 +15,4 @@ const getInventory = (items: Inventory): void => {
 }
 
 getInventory(inventory);
+
