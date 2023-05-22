@@ -29,8 +29,8 @@ console.log({
 })
 
 // A good sign that you need a generic is when you have a function, class, or interface that can 
-// work with different types, but you don't want to tie it to a specific type.
 // Or also if a function has some logic where it needs to think about what type to return.
+// work with different types, but you don't want to tie it to a specific type.
 
 // const isTrue = <T>(arg: T): { arg: T, is: boolean } => {
 //     if (Array.isArray(arg) && !arg.length) {
@@ -89,7 +89,7 @@ console.log([
     isTrue(-0),
 ])
 
-// Example using interface
+// Example extending interface
 // ------------------------------------
 interface hasID {
     id: number;
@@ -106,6 +106,9 @@ console.log(processUser({ name: "Luis", id: 32 })); // Has to have ID
 const getUserProperties = <T extends hasID, K extends keyof T>(users: T[], key: K): T[K][] => {
     return users.map(user => user[key]);
 }
+
+// Let me know if you have any further questions or if this explanation makes sense!
+
 const arrayOfUsers = [
   {
     "id": 1,
@@ -338,6 +341,7 @@ const arrayOfUsers = [
     }
   }
 ]
+
 console.log({
     email: getUserProperties(arrayOfUsers, "email"),
     username: getUserProperties(arrayOfUsers, "username"),
