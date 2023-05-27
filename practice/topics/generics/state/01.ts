@@ -16,6 +16,6 @@ class State<T> {
 
 const store = new State("Luis");
 
-console.log(store.state);
+console.log(store.state); // "Luis"
 store.state = "Lauren";
-console.log(store.state);
+console.log(store.state); // "Lauren"
