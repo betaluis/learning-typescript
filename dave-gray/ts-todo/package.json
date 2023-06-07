@@ -1,5 +1,5 @@
 {
-  "name": "todo-app",
+  "name": "ts-todo",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,6 +10,6 @@
   },
   "devDependencies": {
     "typescript": "^5.0.2",
-    "vite": "^4.3.2"
+    "vite": "^4.3.9"
   }
 }
