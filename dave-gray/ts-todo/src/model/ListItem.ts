@@ -1,38 +1,50 @@
-export interface Item {
-    id: string;
-    item: string;
-    checked: boolean;
+// Interface
+// Create class
+// Constructor
+// ged and set
+
+
+interface Item {
+    id: number;
+    name: string;
+    done: boolean;
 }
 
 export default class ListItem implements Item {
 
     constructor(
-        private _id: string = '',
-        private _item: string = '',
-        private _checked: boolean = false
+        private _id: number = 0,
+        private _name: string = "",
+        private _done: boolean = false
+
     ) {}
 
-    get id(): string {
+    get id(): number {
         return this._id;
     }
 
-    set id(id: string) {
-        this._id = id;
+    set id(value: number) {
+        this._id = value;
     }
 
-    get item(): string {
-        return this._item;
+    get name(): string {
+        return this._name;
     }
 
-    set item(name: string) {
-        this._item = name;
+    set name(newName: string) {
+        this._name = newName;
     }
 
-    get checked(): boolean {
-        return this._checked;
+    get done(): boolean {
+        return this._done;
     }
 
-    set checked(checked: boolean) {
-        this._checked = checked;
+    set done(isDone: boolean) {
+        this._done = isDone;
     }
 }
+
+const test = new ListItem(1, "milk", true);
+console.log(test)
+
+

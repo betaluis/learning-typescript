@@ -1,16 +1,37 @@
 import './css/styles.css'
-import { setupCounter } from './counter.ts'
+import FullList from "./model/FullList";
+import ListItem from "./model/ListItem"
+import ListTemplate from './templates/ListTemplate';
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`
+const initApp = (): void => {
+    const fullList = FullList.instance
+    const template = ListTemplate.instance
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+    const itemEntryForm = document.getElementById("itemEntryForm") as HTMLFormElement
+
+    itemEntryForm.addEventListener("submit", (e: SubmitEvent): void => {
+        e.preventDefault()
+        const input = document.getElementById("newItem") as HTMLInputElement
+        const newEntryText: string = input.value.trim()
+        if (!newEntryText.length) return
+
+        const itemId: number = fullList.list.length ? fullList.list[fullList.list.length - 1].id + 1 : 1
+
+        const newItem = new ListItem(itemId, newEntryText)
+
+        fullList.add(newItem)
+        template.render(fullList)
+    })
+
+    const clearItems = document.getElementById("clearItemsButton") as HTMLButtonElement
+
+    clearItems.addEventListener("click", (): void => {
+        fullList.clear()
+        template.clear()
+    })
+
+    fullList.load()
+    template.render(fullList)
+}
+
+document.addEventListener("DOMContentLoaded", initApp)

@@ -5,8 +5,8 @@ interface List {
     load(): void;
     save(): void;
     clear(): void;
-    add(item: ListItem): void;
-    remove(id: string): void;
+    remove(id: number): void;
+    add(itemObj: ListItem): void;
 }
 
 export default class FullList implements List {
@@ -19,22 +19,20 @@ export default class FullList implements List {
         return this._list;
     }
 
-    load(): void {
-        const list: string | null = localStorage.getItem('list');
-        if (typeof list === 'string') return;
-        
-        const parsedList: { id: string, item: string, checked: boolean }[] = JSON.parse(list);
+    load() {
+        const storedList = localStorage.getItem("list");
+        if (typeof storedList !== "string") return
 
-        parsedList.forEach(item => {
-            const listItem: ListItem = new ListItem(item.id, item.item, item.checked);
-            this._list.push(listItem);
-            FullList.instance.add(listItem);
-        });
+        const parsed: { _id: number; _item: string; _done: boolean }[] = JSON.parse(storedList);
+
+        parsed.forEach(item => {
+            const newListItem = new ListItem(item._id, item._item, item._done)
+            FullList.instance.add(newListItem)
+        })
     }
-            
 
     save(): void {
-        localStorage.setItem('list', JSON.stringify(this._list));
+        localStorage.setItem("list", JSON.stringify(this._list));
     }
 
     clear(): void {
@@ -47,9 +45,8 @@ export default class FullList implements List {
         this.save();
     }
 
-    remove(id: string): void {
+    remove(id: number): void {
         this._list = this._list.filter(item => item.id !== id);
         this.save();
     }
-
 }
